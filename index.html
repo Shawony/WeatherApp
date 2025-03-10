@@ -14,9 +14,6 @@
             <input type="text" placeholder="enter city name" spellcheck="false">
             <button><img src="images/search.png" alt=""></button>
         </div>
-        <div class="error">
-            <p>Invalid city name</p>
-        </div>
         <div class="weather">
             <img class="weather-icon" src="images/rain.png" alt="weather-icon">
             <h1 class="temp">22°C</h1>
@@ -55,9 +52,10 @@
         async function checkWeather(city) {
             const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
 
-            if (response.status == 404) {
-                document.querySelector(".error").style.display = "block";
-                document.querySelector(".weather").style.display = "none";
+            if (city === "") {
+                alert("Please Enter a City or Country Name")
+            } else if (response.status == 404) {
+                alert("City or Country Name \"" + city + "\"is Invalid. Please Enter a Correct City or Country Name.")
             } else {
                 var data = await response.json();
 
